@@ -10,7 +10,7 @@ import androidx.room.Query
 interface ProductsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllProducts(mProductsEntity: List<ProductsEntity>)
+  suspend  fun insertAllProducts(mProductsEntity: ProductsEntity)
 
     @Query("SELECT * FROM products_table")
     fun showAllProducts():LiveData<List<ProductsEntity>>
