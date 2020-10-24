@@ -1,4 +1,4 @@
-package com.example.david.networkWithRetrofit
+package com.example.david.repository.networkWithRetrofit
 
 import retrofit2.Call
 import retrofit2.Response

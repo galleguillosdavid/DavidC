@@ -1,4 +1,4 @@
-package com.example.david.networkWithRetrofit.pojo
+package com.example.david.repository.networkWithRetrofit.pojo
 
 
 import com.google.gson.annotations.SerializedName
