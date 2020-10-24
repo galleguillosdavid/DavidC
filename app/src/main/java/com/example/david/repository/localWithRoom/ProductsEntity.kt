@@ -1,4 +1,4 @@
-package com.example.david.repository
+package com.example.david.repository.localWithRoom
 
 import androidx.annotation.NonNull
 import androidx.room.Entity

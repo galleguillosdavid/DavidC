@@ -1,8 +1,8 @@
 package com.example.david.repository
 
 import android.util.Log
-import com.example.david.repository.networkWithRetrofit.ProductsNetwork
-import com.example.david.repository.networkWithRetrofit.RetrofitClient
+import com.example.david.repository.localWithRoom.networkWithRetrofit.ProductsNetwork
+import com.example.david.repository.localWithRoom.networkWithRetrofit.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
