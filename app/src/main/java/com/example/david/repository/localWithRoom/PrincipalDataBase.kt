@@ -10,7 +10,7 @@ abstract class ProductsDataBase: RoomDatabase() {
     //Dao
     abstract fun mProductsDao(): ProductsDao
 
-    companion object volatile{
+    companion object {
         @Volatile
         private var INSTANCE : ProductsDataBase? = null
 
