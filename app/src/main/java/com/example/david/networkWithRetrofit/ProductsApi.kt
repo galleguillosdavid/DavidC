@@ -1,4 +1,4 @@
-package com.example.david.networkWithRetrofit.pojo
+package com.example.david.networkWithRetrofit
 
 import retrofit2.Call
 import retrofit2.Response
