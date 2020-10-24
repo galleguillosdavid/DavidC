@@ -14,25 +14,24 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ProductsRepository(private val mProductsDao: ProductsDao) {
-    private val retroService= RetrofitClient.getRetrofitClient()
-//    Me traigo toda la tabla
-    val allProductsLiveData= mProductsDao.showAllProducts()
+    private val retroService = RetrofitClient.getRetrofitClient()
+
+    //    Me traigo toda la tabla
+    val allProductsLiveData = mProductsDao.showAllProducts()
 
     //Vieja confiable
     fun getDataFromServer() {
-        val call= retroService.fechAllProducts()
-        call.enqueue(object :Callback<List<ProductsNetworkItem>>{
-
-
+        val call = retroService.fechAllProducts()
+        call.enqueue(object : Callback<List<ProductsNetworkItem>> {
 
 
             override fun onResponse(
                 call: Call<List<ProductsNetworkItem>>,
                 response: Response<List<ProductsNetworkItem>>
             ) {
-                when(response.code()){
+                when (response.code()) {
                     in 200..299 -> {
-                        Log.d("Response",response.body().toString())
+                        Log.d("Response", response.body().toString())
                         CoroutineScope(Dispatchers.IO).launch {
                             response.body()?.let {
                                 it
@@ -40,24 +39,48 @@ class ProductsRepository(private val mProductsDao: ProductsDao) {
 
                         }
                     }
-                    in 300..399 -> Log.d("Response",response.body().toString())
-                    in 400..499 -> Log.d("Response",response.body().toString())
-                    in 500..599 -> Log.d("Response",response.body().toString())
-                    else -> Log.d("Error",response.body().toString())
+                    in 300..399 -> Log.d("Response", response.body().toString())
+                    in 400..499 -> Log.d("Response", response.body().toString())
+                    in 500..599 -> Log.d("Response", response.body().toString())
+                    else -> Log.d("Error", response.body().toString())
                 }
             }
 
             override fun onFailure(call: Call<List<ProductsNetworkItem>>, t: Throwable) {
-                Log.e("Error",t.message.toString())
+                Log.e("Error", t.message.toString())
             }
 
         })
     }
-    fun convert(listFromNetwork: ProductsNetwork): List<ProductsEntity>{
-        val listMutable = mutableListOf<ProductsEntity>()
-        listFromNetwork.map {
-            listMutable.add(ProductsEntity(it.id,it.image,it.name,it.price))
+
+    // corrutinas
+    fun getDataFromServerCorroutines() = CoroutineScope(Dispatchers.IO).launch {
+        val service = kotlin.runCatching { retroService.fetchAllProductsCorroutines() }
+        service.onSuccess {
+            when (it.code()) {
+                in 200..299 -> {
+                    it.body()?.let {
+//                            mProductsDao.insertAllProducts(convert(ProductsNetworkItem()))
+                    }
+
+                }
+
+                in 300..399 -> Log.d("Response", it.body().toString())
+                in 400..499 -> Log.d("Response", it.body().toString())
+                in 500..599 -> Log.d("Response", it.body().toString())
+                else -> Log.d("Error", it.body().toString())
+            }
+            service.onFailure {
+                Log.e("Error", it.message.toString())
+            }
         }
-        return listMutable
+
+        fun convert(listFromNetwork: ProductsNetwork): List<ProductsEntity> {
+            val listMutable = mutableListOf<ProductsEntity>()
+            listFromNetwork.map {
+                listMutable.add(ProductsEntity(it.id, it.image, it.name, it.price))
+            }
+            return listMutable
+        }
     }
 }
