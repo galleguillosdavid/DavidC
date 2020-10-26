@@ -14,7 +14,7 @@ interface ProductsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
 //  suspend fun insertAllProducts(mProductsEntity: retrofit2.Response<kotlin.collections.List<com.example.david.repository.localWithRoom.networkWithRetrofit.Products>>)
 //  suspend fun insertAllProducts(mProductsEntity: List<Products>)
-    suspend fun insertAllProducts(mProductsEntity: Response<List<Products>>)
+    fun insertAllProducts(mProductsEntity: List<Products>)
 
     @Query("SELECT * FROM products_table")
     fun showAllProducts():LiveData<List<Products>>

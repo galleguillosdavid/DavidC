@@ -19,7 +19,9 @@ class ProductsRepository(private val mProductsDao: ProductsDao) {
         val service = kotlin.runCatching { retroService.fetchAllProductsCorroutines() }
         service.onSuccess {
             when (it.code()) {
-                in 200..299 ->mProductsDao.insertAllProducts(it)//c8 t3:39:00
+                in 200..299 ->it.body()?.let {
+                    mProductsDao.insertAllProducts(it)
+                }//c8 t3:39:00
                 in 300..399 -> Log.d("Response", it.body().toString())
                 in 400..499 -> Log.d("Response", it.body().toString())
                 in 500..599 -> Log.d("Response", it.body().toString())

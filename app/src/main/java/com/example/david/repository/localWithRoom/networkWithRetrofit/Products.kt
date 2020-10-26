@@ -1,6 +1,5 @@
 package com.example.david.repository.localWithRoom.networkWithRetrofit
 
-
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
