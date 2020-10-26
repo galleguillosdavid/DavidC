@@ -1,7 +1,9 @@
 package com.example.david.repository
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.example.david.repository.localWithRoom.ProductsDao
+import com.example.david.repository.localWithRoom.networkWithRetrofit.Products
 import com.example.david.repository.localWithRoom.networkWithRetrofit.RetrofitClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,6 +14,10 @@ class ProductsRepository(private val mProductsDao: ProductsDao) {
 
     //    Me traigo toda la tabla
     val allProductsLiveData = mProductsDao.showAllProducts()
+
+    fun getProductById(id: Int): LiveData<Products>{
+        return mProductsDao.showOnProductById(id)
+    }
 
 
     // corrutinas R1 T 02:57:50

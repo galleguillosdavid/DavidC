@@ -19,4 +19,8 @@ class ProductsViewModel(application: Application): AndroidViewModel(application)
         livedataFromLocal= mRepository.allProductsLiveData
     }
 
+    fun getProductById(id: Int): LiveData<Products>{
+        return mRepository.getProductById(id)
+    }
+
 }

@@ -20,5 +20,5 @@ interface ProductsDao {
     fun showAllProducts():LiveData<List<Products>>
 
     @Query("SELECT * FROM products_table WHERE id=:mId")
-    fun showOnProductById(mId: Int):LiveData<List<Products>>
+    fun showOnProductById(mId: Int):LiveData<Products>
 }
