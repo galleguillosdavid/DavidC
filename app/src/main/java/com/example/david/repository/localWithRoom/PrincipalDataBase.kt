@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.david.repository.localWithRoom.networkWithRetrofit.Products
 
-@Database(entities = [ProductsEntity::class],version = 1)
+@Database(entities = [Products::class],version = 1)
 abstract class ProductsDataBase: RoomDatabase() {
     //Dao
     abstract fun mProductsDao(): ProductsDao
